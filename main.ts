@@ -37,6 +37,10 @@ try {
   console.error(`POST.json could not be read from ${BOT_DIR}: ${(err as Error).message}`);
   process.exit(1);
 }
+if (typeof post !== 'object' || post === null || Array.isArray(post)) {
+  console.error(`POST.json does not name an X post: ${JSON.stringify(post)}`);
+  process.exit(1);
+}
 if (typeof post.url !== 'string' || !POST_URL_RE.test(post.url)) {
   console.error(`POST.json does not name an X post: ${JSON.stringify(post.url)}`);
   process.exit(1);
